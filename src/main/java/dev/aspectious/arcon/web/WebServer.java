@@ -2,12 +2,13 @@ package dev.aspectious.arcon.web;
 
 import com.sun.net.httpserver.*;
 import jdk.jshell.spi.ExecutionControl;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 import java.net.*;
 
 
-public class WebServer {
+public class WebServer  {
     private WebServerType type;
     private int port;
     private HttpServer server;

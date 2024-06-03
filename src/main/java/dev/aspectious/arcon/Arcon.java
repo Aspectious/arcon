@@ -6,13 +6,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import dev.aspectious.arcon.web.*;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class Arcon extends JavaPlugin {
-    private static WebServer webinterface = new WebServer(WebServerType.HTTP,80);
+    private WebServer webinterface;
+    private WSServer wsserver;
+
+    @Override
+    public void onEnable() {
+        webinterface = new WebServer(WebServerType.HTTP,80);
+        wsserver = new WSServer(81);
+        wsserver.start();
+    }
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         if (cmd.getName().equalsIgnoreCase("cv")) {

@@ -8,6 +8,17 @@ import java.io.*;
 import java.io.IOException;
 
 public class RootHandler implements HttpHandler {
+    private String parseResourceFile(String resourceFile) throws IOException {
+        String out = "";
+        try (InputStream in = getClass().getResourceAsStream(resourceFile);
+             BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                out += line + "\n";
+            }
+        }
+        return out;
+    }
     @Override
     public void handle(HttpExchange he) throws IOException {
         String log = "";
@@ -22,8 +33,7 @@ public class RootHandler implements HttpHandler {
             System.out.println(e);
         }
 
-        String response = "<h1>Server start success if you see this message</h1>" + "<h1>Port: " + 80 + "</h1>" + "<div>" + log + "</div>";
-
+        String response = parseResourceFile("/framework/index.html") + log;
         he.sendResponseHeaders(200, response.length());
         OutputStream os = he.getResponseBody();
         os.write(response.getBytes());
