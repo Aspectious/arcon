@@ -1,8 +1,10 @@
 package dev.aspectious.arcon.web;
 
 import com.sun.net.httpserver.*;
+import dev.aspectious.arcon.web.handlers.CGIHandler;
+import dev.aspectious.arcon.web.handlers.ResourceHandler;
+import dev.aspectious.arcon.web.handlers.RootHandler;
 import jdk.jshell.spi.ExecutionControl;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 import java.net.*;
@@ -23,7 +25,7 @@ public class WebServer  {
                 throw new RuntimeException(e);
             }
             System.out.println("server started at " + port);
-            this.server.createContext("/", new RootHandler());
+            this.createContexts();
             this.server.setExecutor(null);
             this.server.start();
         } else {
@@ -33,5 +35,11 @@ public class WebServer  {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    private void createContexts() {
+        this.server.createContext("/", new RootHandler());
+        this.server.createContext("/cgi", new CGIHandler());
+        this.server.createContext("/res", new ResourceHandler());
     }
 }

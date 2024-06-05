@@ -1,24 +1,13 @@
-package dev.aspectious.arcon.web;
+package dev.aspectious.arcon.web.handlers;
 
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
 
 import java.io.*;
 
-import java.io.IOException;
+import dev.aspectious.arcon.util.*;
 
 public class RootHandler implements HttpHandler {
-    private String parseResourceFile(String resourceFile) throws IOException {
-        String out = "";
-        try (InputStream in = getClass().getResourceAsStream(resourceFile);
-             BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                out += line + "\n";
-            }
-        }
-        return out;
-    }
     @Override
     public void handle(HttpExchange he) throws IOException {
         String log = "";
@@ -33,7 +22,7 @@ public class RootHandler implements HttpHandler {
             System.out.println(e);
         }
 
-        String response = parseResourceFile("/framework/index.html") + log;
+        String response = Resources.parseResourceFile("/framework/html/index.html") + log;
         he.sendResponseHeaders(200, response.length());
         OutputStream os = he.getResponseBody();
         os.write(response.getBytes());

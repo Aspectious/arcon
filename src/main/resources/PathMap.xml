@@ -1,0 +1,9 @@
+<PathMap>
+    <Path urlPath="/cgi/home" resourcePath="/framework/html/index.html"/>
+    <Path urlPath="/cgi/login" resourcePath="/framework/html/login.html"/>
+    <Path urlPath="/res/js/index.html.js" resourcePath="/framework/js/index.html.js"/>
+    <Path urlPath="/res/js/login.html.js" resourcePath="/framework/js/login.html.js"/>
+    <Path urlPath="/res/style/stylesheet.master.css" resourcePath="/framework/css/stylesheet.master.css"/>
+    <Path urlPath="/res/images/ARCON-ICON.png" resourcePath="/images/ARCON-ICON.png"/>
+    <Path urlPath="/res/images/ARCON-LOGO-FULL.png" resourcePath="/images/ARCON-LOGO-FULL.png"/>
+</PathMap>
